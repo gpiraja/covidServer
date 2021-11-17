@@ -11,25 +11,41 @@ const itemRouter = express.Router({mergeParams: true});
 rotaCovid.use('/', itemRouter);
 
 rotaCovid.route('/')
-    .all((req, res, next) => {
+.get((req,res,next) => {
+    Casos.find({})
+    .then((casos) => {
         res.statusCode = 200;
-        res.setHeader('Content-type', 'text/plain');
-        next();
-    })
-    .get((req, res) => {
-        res.end('GET - Todos casos de Covid ');
-    })
-    .post((req, res) => { // ajustar req.body.nome
-        res.end('POST - Adicionando registro: ' + req.body.nome );
-     })
-    .put((req, res, next) => {
-        res.statusCode = 403;
-        res.end('PUT - operação não suportada'); 
-    })
-    .delete((req, res) => { // remover posteriormente para segurança
-        res.end('Deletando todos os casos!!');
-    });
- /// Aqui começa o item específico
+        res.setHeader ('Content-type', 'application/json');
+        res.json(casos);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+})
+.post ((req,res,next) => {
+    Casos.create(req.body)
+    .then ((caso) =>{
+        console.log ('Caso adicionado', caso);
+        res.statusCode = 200;
+        res.setHeader ('Content-type', 'application/json');
+        res.json(casos);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+})
+.put((req, res, next) => {
+    res.statusCode = 403;
+    res.end('PUT - operação não suportada');
+}) 
+.delete((req, res, next) => {
+    Casos.remove({})
+    .then((resp) => {
+        res.statusCode = 200;
+        res.setHeader('Content-Type', 'application/json');
+        res.json(resp);
+    }, (err) => next(err))
+    .catch((err) => next(err));
+});
+    
+    
+
 itemRouter.route('/:casoId')
     .get((req,res) => {
         res.end('Mandando detalhes do caso: ' + req.params.casoId +' to you!');
