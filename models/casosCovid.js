@@ -2,22 +2,27 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const covidSchema = new Schema({
+    dataNotificacao:{
+        type: String,
+        required: true
+    },
     dataPrimeirosSintomas: {
-        type: Date,
+        type: String,
         required: false
     },
     dataTeste: {
-        type: Date,
-        required: false
-    },
-    dataNascimento: {
-        type: Date,
+        type: String,
         required: false
     },
     dataObito: {
-        type: Date,
+        type: String,
         required: false
     },
+    dataNascimento: {
+        type: String,
+        required: false
+    },
+
     faixaEtaria: {
         type: String,
         required: false
@@ -38,7 +43,7 @@ const covidSchema = new Schema({
         type: String,
         required: false
     },
-    tipoDeTeste: {        
+    tipoTeste: {        
         type: String,
         required: false
     },
@@ -49,22 +54,18 @@ const covidSchema = new Schema({
     dispineia: {
         type: Boolean,
         required: false
-
     },
     febre: {
         type: Boolean,
         required: false
-
     },
     tosse: {
         type: Boolean,
         required: false
-
     },
     uti: {
         type: Boolean,
         required: false
-
     },
     dorGarganta: {
         type: Boolean,
@@ -74,6 +75,6 @@ const covidSchema = new Schema({
     timestamps: true
 });
 
-var Casos = mongoose.model('caso', dishSchema);
+var Casos = mongoose.model('caso', covidSchema);
 
 module.exports = Casos;
