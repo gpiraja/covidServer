@@ -46,7 +46,7 @@ rotaCovid.route('/')
     
     
 
-itemRouter.route('/:casoId')
+/* itemRouter.route('/:casoId')
     .get((req,res) => {
         res.end('Mandando detalhes do caso: ' + req.params.casoId +' to you!');
     })
@@ -60,7 +60,7 @@ itemRouter.route('/:casoId')
       })
     .delete((req, res, next) => {
           res.end('Deletando caso : ' + req.params.casoId);
-      });
+      }); */
       
     module.exports = rotaCovid;
     
