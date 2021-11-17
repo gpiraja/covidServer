@@ -26,7 +26,7 @@ rotaCovid.route('/')
         console.log ('Caso adicionado', caso);
         res.statusCode = 200;
         res.setHeader ('Content-type', 'application/json');
-        res.json(casos);
+        res.json(caso);
     }, (err) => next(err))
     .catch((err) => next(err));
 })
